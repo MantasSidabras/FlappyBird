@@ -28,7 +28,7 @@ let GameState = {
   update: function() {
     bird.update();
 
-    if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+    if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || game.input.pointer1.isDown){
       if(keypress){
         bird.flap();
         keypress = false;
