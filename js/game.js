@@ -1,9 +1,10 @@
-let game = new Phaser.Game(400, 600, Phaser.CANVAS, 'game');
+let game = new Phaser.Game(300, 500, Phaser.CANVAS, 'game');
 
 
 let bg;
 var bird;
-let pipe;
+let pipes = [];
+
 let keypress = true;
 let GameState = {
   preload: function() {
@@ -24,16 +25,20 @@ let GameState = {
     }
 
     bird = new Bird(game.world.centerX,game.world.centerY);
-    pipe = new Pipe();
-    bird.init();
+    pipes.push(new Pipe(500));
+    pipes.push(new Pipe(680));
+
   },
   update: function() {
     bird.update();
-    pipe.update();
-
-    if(pipe.bottomSprite.x + pipe.bottomSprite.width < 0){
-      pipe = new Pipe();
+    for(let i = 0; i < pipes.length; i++){
+      pipes[i].update();
+      if(pipes[i].bottomSprite.x + pipes[i].bottomSprite.width < 0){
+        pipes[i] = new Pipe();
+      }
     }
+
+
 
     if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || game.input.pointer1.isDown){
       if(keypress){

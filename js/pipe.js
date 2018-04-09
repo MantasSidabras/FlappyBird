@@ -1,27 +1,27 @@
-var Pipe = function(){
+var Pipe = function(xoffset){
+  this.xoffset = 0;
+  this.speed = 3;
+  this.width = game.height * 0.3;
 
-  this.speed = 2;
-  this.width = game.height *0.3;
-  this.topSprite = game.add.sprite(game.width, 0, 'pipe');
-  this.bottomSprite = game.add.sprite(game.width, 0, 'pipe');
+  this.gapWidth = 150;
+  this.gap = getRandomIntInclusive(game.height * 0.4, game.height * 0.8);
 
-  // this.topSprite.anchor.setTo(0);
+  if(typeof xoffset !== 'undefined'){
+    this.xoffset = xoffset;
+  }
+  this.bottomSprite = game.add.sprite(game.width + this.xoffset, this.gap, 'pipe');
+  this.topSprite = game.add.sprite(game.width + this.xoffset, this.gap - this.gapWidth, 'pipe');
+  this.topSprite.x += this.topSprite.width;
 
-  this.topSprite.height = getRandomIntInclusive(game.height * 0.1, game.height * 0.6);
-  this.bottomSprite.height = game.height - this.topSprite.height - this.width;
-  this.bottomSprite.y = this.topSprite.height + this.width;
-  this.topSprite.y += this.topSprite.height;
-  // this.bottomSprite.y = game.height;
-  // this.bottomSprite.anchor(0, this.bottomSprite.height);
-  // this.bottomSprite.scale(1,-1);
-   this.topSprite.angle = 180;
-   this.topSprite.x += this.topSprite.width;
+  this.topSprite.scale.y = 1.3;
+  this.bottomSprite.scale.y = 1.3;
+  this.topSprite.angle = 180;
 
-   this.update = function(){
+  this.update = function(){
      this.topSprite.x -= this.speed;
      this.bottomSprite.x -= this.speed;
-   }
-   
+  }
+
 }
 
 function getRandomIntInclusive(min, max) {
