@@ -2,6 +2,7 @@ var Pipe = function(xoffset){
   this.xoffset = 0;
   this.speed = 3;
   this.width = game.height * 0.3;
+  this.isScored = false;
 
   this.gapWidth = 150;
   this.gap = getRandomIntInclusive(game.height * 0.4, game.height * 0.8);
