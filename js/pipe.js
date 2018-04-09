@@ -11,11 +11,14 @@ var Pipe = function(xoffset){
   }
   this.bottomSprite = game.add.sprite(game.width + this.xoffset, this.gap, 'pipe');
   this.topSprite = game.add.sprite(game.width + this.xoffset, this.gap - this.gapWidth, 'pipe');
-  this.topSprite.x += this.topSprite.width;
+  //this.topSprite.x += this.topSprite.width;
 
-  this.topSprite.scale.y = 1.3;
+
+  game.physics.arcade.enable([this.bottomSprite, this.topSprite]);
+
+  this.topSprite.scale.y = -1.3;
   this.bottomSprite.scale.y = 1.3;
-  this.topSprite.angle = 180;
+  // this.topSprite.angle = 180;
 
   this.update = function(){
      this.topSprite.x -= this.speed;

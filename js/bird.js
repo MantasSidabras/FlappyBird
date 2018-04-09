@@ -4,12 +4,17 @@ var Bird = function(x, y){
   this.acceleration = 0.3 ;
   this.angleIncrement = 1;
 
+
+  game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
   this.sprite.anchor.setTo(0, 0.5);
   this.sprite.x -= 2*this.sprite.width;
   this.sprite.scale.set(1.2);
   this.sprite.animations.add('flap', [0,2,1,2,0], 7, true);
   this.sprite.frame = 0;
   this.sprite.play('flap');
+
+  this.sprite.body.onCollide = new Phaser.Signal();
+  this.sprite.body.onCollide.add(hitSprite, this);
 
   this.update = function(){
     if(this.speed <= 15){

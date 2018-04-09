@@ -17,6 +17,7 @@ let GameState = {
     bg = game.add.sprite(0,0,'background');
     bg.width = game.width;
     bg.height = game.height;
+    game.physics.startSystem(Phaser.Physics.ARCADE);
 
     game.input.keyboard.onUpCallback = function( e ){
       if(e.keyCode == Phaser.Keyboard.SPACEBAR){
@@ -32,7 +33,10 @@ let GameState = {
   update: function() {
     bird.update();
     for(let i = 0; i < pipes.length; i++){
+      game.physics.arcade.collide(bird.sprite, pipes[i].bottomSprite);
+      game.physics.arcade.collide(bird.sprite, pipes[i].topSprite);
       pipes[i].update();
+
       if(pipes[i].bottomSprite.x + pipes[i].bottomSprite.width < 0){
         pipes[i] = new Pipe();
       }
@@ -47,6 +51,11 @@ let GameState = {
       }
     }
   }
+}
+
+function hitSprite (sprite1, sprite2) {
+  console.log('game over!');
+  die();
 }
 
 game.state.add('GameState', GameState);
